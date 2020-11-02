@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGD</title>
+  <script src="vue.js"></script>
+  <style>
+    footer{
+    font-family: 'Libre Franklin', sans-serif;
+    background-color: blue;
+    color: white;
+    }
+    </style>
+</head>
+<body>
+  <div id="app" align="center">
+      <h1>{{ judul }}</h1> 
+      <p>{{ tek('1-10') }}</p> 
+
+      <div>
+          <input v-model="teks" placeholder="tulis sesuatu..."/>
+          <h2>{{ teks }}</h2>
+          <button @click="Enter">Enter</button>
+      </div>
+      <footer>
+        <p align="center">{{ nama }} | {{ npm }} | {{ kelas }}</p>
+      </footer>
+  </div>
+  
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            judul: "Tebak Angka Dari",
+            nama: "Evan Risky Yohanes",
+            npm: "180709899",
+            kelas: "B",
+        },
+        methods: {
+            tek(teks){
+                return `Tebak Angka ${teks}`;
+            },
+        },
+    })
+</script>
+</html>
