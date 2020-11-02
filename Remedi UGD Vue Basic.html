@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>UGD</title>
+  <script src="vue.js"></script>
+  <style>
+    body{
+        height: 100%;
+        background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+        height: 100%;
+        background-position: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        }
+    </style>
+</head>
+<body>
+  <div id="app">
+    <div class="d-flex justify-content-center">
+        <div class="card bg-info col-md-4 col-sm-12 mb-3 mt-4">
+            <div class="card-body bg-light mt-4" align="center">
+                <h1 align="center">{{ judul }}</h1> 
+                <p align="center">{{ tek('1-10') }}</p> 
+                <input type="number" class="form-control" v-model="tebakan" :disabled="isDisabled" placeholder="Masukan angkanya...."/>
+                <br>
+                <button class="btn btn-primary btn-sm" @click="tebak" :disabled="isDisabled"> Enter  </button>
+                <br>
+            </div>
+            <div class="card-body bg-success text-white bg-danger border mt-4" align="center">
+                <div class="text-center" v-show="benar">
+                    <h2 align="center">{{ benar_teks }}</h2>
+                    <button class="btn btn-primary" @click="mainlagi" >main lagi</button>
+                </div>
+                <div class="text-center" v-show="kalah">
+                    <h2 align="center">{{ kalah_teks }}</h2>
+                    <button class="btn btn-primary" @click="mainlagi" >main lagi</button>
+                </div>
+                <div class="text-center" v-show="salah">
+                    <h2 align="center">{{ coba_lagi }}</h2>
+                    <button class="btn bg-secondary" @click="cobalagi" >Coba lagi</button>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <br>
+    {{ angka }}
+      <footer>
+        <h5 align="center">{{ nama }} | {{ npm }} | {{ kelas }}</h5>
+      </footer>
+  </div>
+  
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            angka: Math.floor(Math.random() * 10)+1,
+            tebakan:0,
+            coba_lagi: "Kamu belum beruntung, silahkan Coba lagi",
+            benar_teks: "Selamat Tebakan Kamu Benar",
+            kalah_teks: "Yahhh Kamu kalah",
+            kesempatan:3,
+            salah:undefined,
+            benar:undefined,
+            kalah:undefined,
+            isDisabled:false,
+            judul: "Tebak Angka",
+            nama: "Evan Risky Yohanes",
+            npm: "180709899",
+            kelas: "B",
+        },
+        methods: {
+            tek(teks){
+                return `Tebak Angka ${teks}`;
+            },
+            tebak(){
+            if(this.tebakan == this.angka){
+                this.benar = 1;
+            }else {
+                    this.salah =1;
+                    this.isDisabled = true;
+                    angka: Math.floor(Math.random() * 10)+1;
+                    this.kesempatan--;
+                    if(this.kesempatan==0){
+                        this.kalah=1;
+                        this.salah = undefined;
+                    }
+            }              
+           },
+           cobalagi(){
+                this.isDisabled = false;
+                this.salah = undefined;
+           },
+           mainlagi(){
+               location.reload();
+           }
+        },
+    })
+</script>
+</html>
